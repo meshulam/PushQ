@@ -8,6 +8,7 @@
         android:targetSdkVersion="15" />
     
     <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
     <application
         android:icon="@drawable/ic_launcher"
@@ -18,7 +19,6 @@
             android:label="@string/title_activity_config" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -37,6 +37,13 @@
             android:name=".MonitorService"
             android:label="PushQ monitor service"
             android:exported="false" />
+        
+        <receiver android:name=".BootStarter" android:enabled="true" android:exported="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </receiver>
             
     </application>
 

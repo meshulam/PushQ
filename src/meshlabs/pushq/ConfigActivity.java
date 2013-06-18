@@ -17,15 +17,11 @@ import android.widget.SimpleCursorAdapter;
 
 public class ConfigActivity extends ListActivity {
 	private final static String TAG = "ConfigActivity";
-	private final static int CREATE_REQUEST = 1;
 	
+	// extra data key in the intent we send to the editor
 	public final static String INTENT_ID_KEY = "rowId";
 	
 	private PushQDbHelper dbHelper;
-
-	
-	private MonitorService service = null;
-	//private PushItemList items = null;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

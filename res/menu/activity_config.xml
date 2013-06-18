@@ -2,12 +2,8 @@
     <item android:id="@+id/add_item"
         android:title="@string/add_item"
         android:orderInCategory="100"
-        android:showAsAction="never" 
-        />
-    <item android:id="@+id/clear_items"
-        android:title="@string/clear_items"
-        android:orderInCategory="200"
-        android:showAsAction="never"
+        android:icon="@drawable/ic_menu_add"
+        android:showAsAction="ifRoom"
         />
     <item android:id="@+id/start_service"
         android:title="Start service"

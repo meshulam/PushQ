@@ -1,34 +1,32 @@
 package meshlabs.pushq;
 
 import java.util.Timer;
-import java.util.TimerTask;
 
-import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.app.Service;
-import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.IBinder;
-import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.widget.Toast;
 
+/**
+ * Service which should be running all the time. Starts a timer which checks once a minute if any tasks are due.
+ * The real work is done in the MonitorTask.
+ * 
+ * @author matt
+ *
+ */
 public class MonitorService extends Service {
 	private final static String TAG = "MonitorService";
 	Timer serviceTimer;
 	
 	@Override
-	public void onCreate() {
+	public int onStartCommand(Intent intent, int flags, int startId) {
 		if (serviceTimer != null) 
 			serviceTimer.cancel();
 		
 		serviceTimer = new Timer("PushQ-ServiceTimer");
 		serviceTimer.scheduleAtFixedRate(new MonitorTask(this), 5000, 1*60*1000);
-	}
-	
-	@Override
-	public int onStartCommand(Intent intent, int flags, int startId) {
+		
 		Log.i(TAG, "onStartCommand");
 		Toast.makeText(this, "Starting PushQ service", Toast.LENGTH_SHORT).show();
 		

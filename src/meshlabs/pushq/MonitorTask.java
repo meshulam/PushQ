@@ -21,7 +21,6 @@ public class MonitorTask extends TimerTask {
 	private final Context context;
 	private final PushQDbHelper dbHelper;
 	
-	//String url = "https://docs.google.com/forms/d/16gsZa7bGr3N2Eo-eK5eFyUdlahn5GX_2z1m1-LA_cGE/viewform";
 	long[] vibratePattern = {0, 500, 500, 500};
 	
 	public MonitorTask(Context c) {
@@ -55,7 +54,6 @@ public class MonitorTask extends TimerTask {
 	 * @return
 	 */
 	private boolean shouldSendNotification(Cursor c) {
-		long now = System.currentTimeMillis();
 		long lastScheduled = TimeHelper.lastTimestamp(EntryTable.getTime(c));
 		
 		// If we haven't pushed a notification since the most recent scheduled time, send one.
@@ -83,7 +81,7 @@ public class MonitorTask extends TimerTask {
 	private void sendNotification(int id, String title, String url) {
 		NotificationCompat.Builder mBuilder =
 		        new NotificationCompat.Builder(context)
-		        .setSmallIcon(R.drawable.ic_launcher)
+		        .setSmallIcon(R.drawable.return_from_full_screen)
 		        .setContentTitle(title)
 		        .setContentText(url)
 		        .setAutoCancel(true)
