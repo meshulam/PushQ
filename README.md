@@ -15,8 +15,17 @@ I've been using this to link to a 1-question Google form with a question like "H
 
 My theory is that this simple pushed question workflow *(PushQ, get it?)* acts kind of like a virtual coach. You might just look forward to reporting your progress at your "appointment"... or dread the prospect of recording a lack of progress when notification time comes around. Too crazy to work? Perhaps. Give it a try and see.
 
+### List of all tasks
+![Main view](https://raw.github.com/meshulam/PushQ/master/screenshot1.png)
 
-=== Potential future improvements
+### Editing a task
+![Editing a task](https://raw.github.com/meshulam/PushQ/master/screenshot2.png)
+
+### Resulting notification
+![Resulting notification](https://raw.github.com/meshulam/PushQ/master/screenshot3.png)
+
+
+### Potential future improvements
 * Sound!
 * Less crappy-looking icons
 * Configurable sound/vibration/icon per task
