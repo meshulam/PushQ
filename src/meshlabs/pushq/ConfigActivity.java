@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
+import android.widget.TextView;
 
 public class ConfigActivity extends ListActivity {
 	private final static String TAG = "ConfigActivity";
@@ -48,7 +49,7 @@ public class ConfigActivity extends ListActivity {
 		
 		// From database columns...
 		String[] dataColumns = {EntryTable.COLUMN_TITLE,
-								EntryTable.COLUMN_TARGET };
+								EntryTable.COLUMN_TIME };
 		
 		// ...to view items
 		int[] viewIds = {android.R.id.text1, android.R.id.text2 };
@@ -59,9 +60,31 @@ public class ConfigActivity extends ListActivity {
 		
 		SimpleCursorAdapter adapter = new SimpleCursorAdapter(this, android.R.layout.two_line_list_item, c, 
 													dataColumns, viewIds, 0);
+		adapter.setViewBinder(new EntryBinder());
 		
 		setListAdapter(adapter);
 		
+		
+    }
+    
+    /**
+     * Handle converting stored time format in DB to displayable value
+     * @author matt
+     *
+     */
+    class EntryBinder implements SimpleCursorAdapter.ViewBinder {
+
+		@Override
+		public boolean setViewValue(View view, Cursor cursor, int columnIndex) {
+			if (columnIndex == 3) {			// Time column
+				TextView tv = (TextView) view;
+				int timeInternal = cursor.getInt(columnIndex);
+				tv.setText(TimeHelper.asString(timeInternal));
+				return true;
+			}
+			return false;
+		}
+    	
     }
     
     private void startService() {
@@ -109,12 +132,20 @@ public class ConfigActivity extends ListActivity {
         }
     }
     
+    
+    /**
+     * Open the push task editor to modify the given task. 
+     * @param rowId
+     */
     private void updateItemScreen(long rowId) {
     	Intent intent = new Intent(this, ItemEditor.class);
     	intent.putExtra(INTENT_ID_KEY, rowId);
     	startActivity(intent);
     }
     
+    /**
+     * Open push task editor to add a new item
+     */
     private void addItemScreen() {
     	Intent intent = new Intent(this, ItemEditor.class);
     	startActivity(intent);
