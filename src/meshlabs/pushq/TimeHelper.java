@@ -1,7 +1,7 @@
 package meshlabs.pushq;
 
-import java.util.Calendar;
-import java.util.GregorianCalendar;
+import org.joda.time.DateTime;
+import org.joda.time.DateTimeComparator;
 
 /**
  * Utility methods for transforming stored time values into other formats
@@ -10,6 +10,7 @@ import java.util.GregorianCalendar;
  *
  */
 public class TimeHelper {
+	private final static String TAG = "TimeHelper";
 	
 	public static String asString(final int time) {
 		return ""+ TimeHelper.getHours(time) + ":" + TimeHelper.getMinutes(time);
@@ -31,16 +32,17 @@ public class TimeHelper {
 	 * Returns last datetime that occurred with the given time. In unix timestamp format. 
 	 */
 	public static long lastTimestamp(final int time) {
-		GregorianCalendar datetime = new GregorianCalendar();
-		datetime.set(Calendar.HOUR_OF_DAY, TimeHelper.getHours(time));
-		datetime.set(Calendar.MINUTE, TimeHelper.getMinutes(time));
+		DateTime now = new DateTime();
+		DateTime last = now.minuteOfDay().setCopy(time);
+
+		DateTimeComparator comparator = DateTimeComparator.getInstance();
 		
 		// If the set hour/minute puts us ahead of now, roll back a day.
-		if (datetime.after(new GregorianCalendar())) {
-			datetime.roll(Calendar.DAY_OF_MONTH, false);
+		if (comparator.compare(now, last) < 0) { 
+			last = last.minusDays(1);
 		}
 		
-		return datetime.getTimeInMillis();
+		return last.getMillis();
 	}
 
 }
