@@ -1,5 +1,5 @@
-PushQ
-=====
+### PushQ - Ultra-simple motivation app for Android
+[View app on Google Play](https://play.google.com/store/apps/details?id=meshlabs.pushq)
 
 When you're working toward a goal, whether it's related to fitness, work, or anything else, sometimes you need a push to keep you going. PushQ is an Android app which distills this idea to its very essence. 
 
